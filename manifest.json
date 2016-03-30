@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "Follow link",
+  "description": "Follow any link with simple shortcuts",
+  "version": "0.1",
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content_script.js"
+      ],
+      "css": [
+        "css/follow_link.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}
