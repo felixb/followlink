@@ -8,6 +8,20 @@
     "webNavigation",
     "<all_urls>"
   ],
+  "commands": {
+    "follow-link-same-tab": {
+      "suggested_key": {
+        "default": "Ctrl+G"
+      },
+      "description": "Follow link in same tab"
+    },
+    "follow-link-new-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+G"
+      },
+      "description": "Follow link in new tab"
+    }
+  },
   "background": {
     "persistent": false,
     "scripts": [

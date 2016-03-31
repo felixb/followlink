@@ -115,13 +115,14 @@ function addCharToPattern(char) {
 }
 
 function keyHandler(event) {
-  if (!followLink.mode && event.code == 'KeyF' && event.ctrlKey == false) {
-    initMode(event.shiftKey ? followLinkModeNewTab : followLinkModeSameTab);
-    event.preventDefault();
-  } else if (followLink.mode > 0 && event.code == 'Escape') {
+  if (!followLink.mode) {
+    return;
+  }
+
+  if (event.code == 'Escape') {
     resetMode();
     event.preventDefault();
-  } else if (followLink.mode > 0 && event.code == 'Enter') {
+  } else if (event.code == 'Enter') {
     if (followLink.mode == followLinkModeNewTab) {
       navigateToSelectedLink();
       resetMode();
@@ -130,19 +131,29 @@ function keyHandler(event) {
       resetMode();
       // let the default event handler click on the link
     }
-  } else if (followLink.mode > 0 && event.code == 'Tab') {
+  } else if (event.code == 'Tab') {
     incPosition();
     event.preventDefault();
-  } else if (followLink.mode > 0 && event.code == 'Backspace') {
+  } else if (event.code == 'Backspace') {
     removeLastCharFromPattern();
     event.preventDefault();
-  } else if (followLink.mode > 0 && !event.ctrlKey) {
+  } else if (!event.ctrlKey) {
     addCharToPattern(String.fromCharCode(event.keyCode));
     event.preventDefault();
   }
 }
 
 document.addEventListener('keydown', keyHandler);
+
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+      if (request.command == 'follow-link-same-tab') {
+        initMode(followLinkModeSameTab);
+      } else if (request.command == 'follow-link-new-tab') {
+        initMode(followLinkModeNewTab);
+      }
+    });
+
 followLink.hint = document.createElement('div');
 followLink.hint.classList.add('follow-link-hint');
 followLink.hint.classList.add('follow-link-hidden');
