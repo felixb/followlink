@@ -1,9 +1,9 @@
 .follow-link-match {
-    background: lightyellow;
+    background: yellow;
 }
 
 .follow-link-selected {
-    background: yellow;
+    background: greenyellow;
 }
 
 .follow-link-hint {
