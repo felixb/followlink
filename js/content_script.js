@@ -11,17 +11,22 @@ var followLink = {
   hint: null
 };
 
+function eachElement(elements, callback) {
+  for (var i = 0, len = elements.length; i < len; i++) {
+    callback(elements[i]);
+  }
+}
+
 function updateUi() {
-  for (var i = 0, len = followLink.unmatchedLinks.length; i < len; i++) {
-    var element = followLink.unmatchedLinks[i];
+  eachElement(followLink.unmatchedLinks, function (element) {
     element.classList.remove('follow-link-match');
     element.classList.remove('follow-link-selected');
-  }
-  for (var i = 0, len = followLink.matchedLinks.length; i < len; i++) {
-    var element = followLink.matchedLinks[i];
+  });
+  eachElement(followLink.matchedLinks, function (element) {
     element.classList.add('follow-link-match');
     element.classList.remove('follow-link-selected');
-  }
+  });
+
   if (followLink.mode > 0) {
     var modeString = followLink.mode == followLinkModeSameTab ? 'Follow Link' : 'Follow Link New Tab';
 
@@ -50,15 +55,13 @@ function matchLinks() {
   followLink.matchedLinks = Array();
   followLink.unmatchedLinks = Array();
 
-  for (var i = 0, len = allLinks.length; i < len; i++) {
-    var element = allLinks[i];
-
+  eachElement(allLinks, function (element) {
     if (re && element.innerHTML && element.innerHTML.match(re)) {
       followLink.matchedLinks.push(element);
     } else {
       followLink.unmatchedLinks.push(element);
     }
-  }
+  });
 
   followLink.currentPosition = followLink.currentPosition % followLink.matchedLinks.length;
 
