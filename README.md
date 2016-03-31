@@ -5,10 +5,10 @@ Follow Link is a simple chrome extension for following links on any website with
 ## Installation
 
 1. Checkout this repo
-2. Open Chromes [extensions](chrome://extensions/)
+2. Open Chromes extensions: `chrome://extensions/`
 3. Enable `Developer mode`
 4. Press `Load unpacked extension...` and choose the location for the source code
-5. [Configure shortcuts](chrome://extensions/configureCommands)
+5. Configure shortcuts: `chrome://extensions/configureCommands`
 
 ## Usage
 
