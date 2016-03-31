@@ -33,7 +33,7 @@ function updateUi() {
     if (followLink.selectedLink) {
       followLink.selectedLink.classList.remove('follow-link-match');
       followLink.selectedLink.classList.add('follow-link-selected');
-      followLink.selectedLink.scrollIntoView({behavior: 'smooth'});
+      followLink.selectedLink.focus();
     }
 
     if (followLink.matchedLinks.length > 0) {
@@ -122,9 +122,14 @@ function keyHandler(event) {
     resetMode();
     event.preventDefault();
   } else if (followLink.mode > 0 && event.code == 'Enter') {
-    navigateToSelectedLink();
-    resetMode();
-    event.preventDefault();
+    if (followLink.mode == followLinkModeNewTab) {
+      navigateToSelectedLink();
+      resetMode();
+      event.preventDefault();
+    } else {
+      resetMode();
+      // let the default event handler click on the link
+    }
   } else if (followLink.mode > 0 && event.code == 'Tab') {
     incPosition();
     event.preventDefault();
