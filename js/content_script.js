@@ -131,7 +131,7 @@ function keyHandler(event) {
   } else if (followLink.mode > 0 && event.code == 'Backspace') {
     removeLastCharFromPattern();
     event.preventDefault();
-  } else if (followLink.mode > 0) {
+  } else if (followLink.mode > 0 && !event.ctrlKey) {
     addCharToPattern(String.fromCharCode(event.keyCode));
     event.preventDefault();
   }
