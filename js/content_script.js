@@ -32,7 +32,7 @@ function updateUi() {
     }
 
     if (followLink.matchedLinks.length > 0) {
-      followLink.hint.innerHTML =  modeString + ' Pattern: ' + followLink.currentPattern + ' | Selected ' + (followLink.currentPosition + 1) + '/' + followLink.matchedLinks.length;
+      followLink.hint.innerHTML = modeString + ' Pattern: ' + followLink.currentPattern + ' | Selected ' + (followLink.currentPosition + 1) + '/' + followLink.matchedLinks.length;
     } else if (followLink.currentPattern.length > 0) {
       followLink.hint.innerHTML = modeString + ' Pattern: ' + followLink.currentPattern + ' | Selected: 0';
     } else {
@@ -76,13 +76,12 @@ function matchLinks() {
 function navigateToSelectedLink() {
   if (followLink.selectedLink) {
     var url = followLink.selectedLink.href;
-    console.debug('follow link: ' + url + ' / mode: ' + followLink.mode);
-    chrome.runtime.sendMessage({url: url, mode: followLink.mode});
+    chrome.runtime.sendMessage({url: url, newTab: followLink.mode == followLinkModeNewTab});
   }
 }
 
 function initMode(mode) {
-  console.debug('Entering follow link mode: ' + mode);
+  console.log('Entering follow link mode: ' + mode);
   followLink.mode = mode;
   followLink.currentPattern = '';
   followLink.currentPosition = 0;
@@ -91,28 +90,24 @@ function initMode(mode) {
 
 function resetMode() {
   followLink.mode = 0;
-  console.debug('Leaving follow link mode');
+  console.log('Leaving follow link mode');
   matchLinks();
 }
 
 function incPosition() {
   followLink.currentPosition += 1;
   matchLinks();
-  console.debug('Current position: ' + followLink.currentPosition);
 }
 
 function removeLastCharFromPattern() {
   followLink.currentPosition = 0;
   followLink.currentPattern = followLink.currentPattern.slice(0, -1);
-  console.debug('Current pattern: ' + followLink.currentPattern);
   matchLinks();
 }
 
 function addCharToPattern(char) {
   followLink.currentPosition = 0;
   followLink.currentPattern += char.toLocaleLowerCase();
-  console.debug('Current pattern: ' + followLink.currentPattern);
-  console.debug(followLink);
   matchLinks();
 }
 
