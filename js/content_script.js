@@ -97,8 +97,8 @@ function resetMode() {
   matchLinks();
 }
 
-function incPosition() {
-  followLink.currentPosition += 1;
+function chgPosition(delta) {
+  followLink.currentPosition += delta;
   matchLinks();
 }
 
@@ -132,12 +132,12 @@ function keyHandler(event) {
       // let the default event handler click on the link
     }
   } else if (event.code == 'Tab') {
-    incPosition();
+    chgPosition(event.shiftKey ? -1 : +1);
     event.preventDefault();
   } else if (event.code == 'Backspace') {
     removeLastCharFromPattern();
     event.preventDefault();
-  } else if (!event.ctrlKey) {
+  } else if (!event.ctrlKey && event.keyCode >= 32) {
     addCharToPattern(String.fromCharCode(event.keyCode));
     event.preventDefault();
   }

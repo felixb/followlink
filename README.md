@@ -12,9 +12,10 @@ Follow Link is a simple chrome extension for following links on any website with
 
 ## Usage
 
-1. Press `Ctrl+G` for following a link in the same tab, press `Ctrl+Shift+G` for creating a new tab.
+1. Press the shortcut from above to enter the follow mode.
 2. Enter any part of the links text for selection.
 3. Press `Tab` for cycling through selected links.
+   Press `Shift+Tab` for cycling backwards.
 4. Press `Enter` for opening the selected link.
 
 ## Contribution
