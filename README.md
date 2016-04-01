@@ -21,3 +21,7 @@ Follow Link is a simple chrome extension for following links on any website with
 ## Contribution
 
 Pull requests are very welcome.
+
+### Building
+
+Call `make` to build the artifact for [Googles webstore](https://chrome.google.com/webstore).
