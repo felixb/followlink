@@ -67,8 +67,10 @@ function matchLinks() {
 
   if (followLink.matchedLinks.length > 0) {
     followLink.selectedLink = followLink.matchedLinks[followLink.currentPosition];
-    followLink.selectedLink.classList.remove('follow-link-matched');
-    followLink.selectedLink.classList.add('follow-link-selected');
+    if (followLink.selectedLink) {
+      followLink.selectedLink.classList.remove('follow-link-matched');
+      followLink.selectedLink.classList.add('follow-link-selected');
+    }
   } else {
     followLink.selectedLink = null;
   }
