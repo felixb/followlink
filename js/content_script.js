@@ -11,6 +11,10 @@ var followLink = {
   hint: null
 };
 
+function isVisible(element) {
+  return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+}
+
 function eachElement(elements, callback) {
   for (var i = 0, len = elements.length; i < len; i++) {
     callback(elements[i]);
@@ -56,7 +60,7 @@ function matchLinks() {
   followLink.unmatchedLinks = Array();
 
   eachElement(allLinks, function (element) {
-    if (re && element.innerHTML && element.innerHTML.match(re)) {
+    if (re && element.innerHTML && element.innerHTML.match(re) && isVisible(element)) {
       followLink.matchedLinks.push(element);
     } else {
       followLink.unmatchedLinks.push(element);
