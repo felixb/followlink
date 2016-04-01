@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Follow link",
-  "description": "Follow any link with simple shortcuts",
   "version": "0.1",
+  "description": "Follow any link with simple shortcuts",
+  "homepage_url": "https://github.com/felixb/followlink",
   "permissions": [
     "tabs",
     "webNavigation",
