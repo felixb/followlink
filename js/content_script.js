@@ -3,6 +3,7 @@ const followLinkModeNewTab = 2;
 
 var followLink = {
   mode: 0,
+  patternError: null,
   currentPattern: null,
   currentPosition: 0,
   selectedLink: null,
@@ -48,13 +49,21 @@ function updateUi() {
       followLink.hint.innerHTML = modeString + ' Pattern: ';
     }
     followLink.hint.classList.remove('follow-link-hidden');
+    followLink.hint.classList.toggle('follow-link-hint-error', followLink.patternError);
   } else {
     followLink.hint.classList.add('follow-link-hidden');
   }
 }
 
 function matchLinks() {
-  var re = followLink.mode && followLink.currentPattern ? new RegExp(followLink.currentPattern, 'i') : null;
+  var re;
+  try {
+    re = followLink.mode && followLink.currentPattern ? new RegExp(followLink.currentPattern, 'i') : null;
+    followLink.patternError = null;
+  } catch (err) {
+    re = null;
+    followLink.patternError = err;
+  }
   var allLinks = document.querySelectorAll("a");
   followLink.matchedLinks = Array();
   followLink.unmatchedLinks = Array();

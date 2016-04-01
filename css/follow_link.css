@@ -17,6 +17,10 @@
     border: solid 1px black;
 }
 
+.follow-link-hint-error {
+    background: orangered;
+}
+
 .follow-link-hidden {
     display: none;
 }
