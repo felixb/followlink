@@ -143,13 +143,14 @@ function keyHandler(event) {
   } else if (event.code == 'Backspace') {
     removeLastCharFromPattern();
     event.preventDefault();
-  } else if (!event.ctrlKey && event.keyCode >= 32) {
-    addCharToPattern(String.fromCharCode(event.keyCode));
+  } else if (!event.ctrlKey && event.charCode) {
+    addCharToPattern(String.fromCharCode(event.charCode));
     event.preventDefault();
   }
 }
 
 document.addEventListener('keydown', keyHandler);
+document.addEventListener('keypress', keyHandler);
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
