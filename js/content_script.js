@@ -99,7 +99,6 @@ function navigateToSelectedLink() {
 }
 
 function initMode(mode) {
-  console.log('Entering follow link mode: ' + mode);
   followLink.mode = mode;
   followLink.currentPattern = '';
   followLink.currentPosition = 0;
@@ -108,7 +107,6 @@ function initMode(mode) {
 
 function resetMode() {
   followLink.mode = 0;
-  console.log('Leaving follow link mode');
   matchLinks();
 }
 
