@@ -64,7 +64,7 @@ function matchLinks() {
     re = null;
     followLink.patternError = err;
   }
-  var allLinks = document.querySelectorAll("a");
+  var allLinks = document.querySelectorAll("a, input, button");
   followLink.matchedLinks = Array();
   followLink.unmatchedLinks = Array();
 
