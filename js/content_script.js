@@ -55,6 +55,14 @@ function updateUi() {
   }
 }
 
+function matchString(s, re) {
+  return s && s.match(re);
+}
+
+function matchElement(element, re) {
+  return matchString(element.innerHTML, re) || matchString(element.id, re) || matchString(element.name, re);
+}
+
 function matchLinks() {
   var re;
   try {
@@ -69,7 +77,7 @@ function matchLinks() {
   followLink.unmatchedLinks = Array();
 
   eachElement(allLinks, function (element) {
-    if (re && element.innerHTML && element.innerHTML.match(re) && isVisible(element)) {
+    if (re && isVisible(element) && matchElement(element, re)) {
       followLink.matchedLinks.push(element);
     } else {
       followLink.unmatchedLinks.push(element);
